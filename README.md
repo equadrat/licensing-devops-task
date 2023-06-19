@@ -13,3 +13,5 @@ You can contact me on my website: [www.equadrat.net](https://www.equadrat.net/en
 
 # License
 Please respect the license and check **LICENSE.md** before using the source code.
+
+The [VstsTaskSdk](https://github.com/microsoft/azure-pipelines-task-lib) is released under the [MIT license](https://github.com/microsoft/azure-pipelines-task-lib/blob/master/LICENSE) separately.

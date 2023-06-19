@@ -25,6 +25,10 @@
             "path": "overview.md"
         }
     },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/equadrat/licensing-devops-task"
+    },
     "contributions": [
         {
             "id": "cli",
