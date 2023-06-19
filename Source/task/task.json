@@ -1,0 +1,147 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "7e17555d-c932-4b6f-b9a7-84a6ff9d9733",
+    "name": "equadratLicensing",
+    "friendlyName": "equadrat Licensing",
+    "description": "A task to sign and validate licenses.",
+    "helpMarkDown": "n/a",
+    "category": "Utility",
+    "author": "equadrat",
+    "visibility": ["Build", "Release"],
+    "demands": [],
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "minimumAgentVersion": "1.95.0",
+    "instanceNameFormat": "Licensing - $(command)",
+    "groups": [
+        {
+            "name": "license",
+            "displayName": "License",
+            "isExpanded": true,
+            "visibleRule": "command = template || command = sign || command = validate"
+        },
+        {
+            "name": "keyFiles",
+            "displayName": "Key files",
+            "isExpanded": true,
+            "visibleRule": "command = keypair || command = sign || command = validate"
+        },
+        {
+            "name": "cli",
+            "displayName": "CLI",
+            "isExpanded": true
+        }
+    ],
+    "inputs": [
+        {
+            "name": "command",
+            "type": "pickList",
+            "label": "Command",
+            "defaultValue": "sign",
+            "required": true,
+            "helpMarkDown": "The command to run.",
+            "options": {
+                "sign": "Sign",
+                "validate": "Validate",
+                "template": "Create new template",
+                "keypair": "Generate new key-pair"
+            },
+            "properties": {
+                "EditableOptions": "False"
+            }
+        },
+        {
+            "name": "publicKeyFile",
+            "type": "filePath",
+            "label": "Public key file",
+            "defaultValue": "",
+            "helpMarkDown": "The public key file is used for validation.",
+            "required": true,
+            "groupName": "keyFiles",
+            "visibleRule": "command = keypair || command = validate"
+        },
+        {
+            "name": "privateKeyFile",
+            "type": "filePath",
+            "label": "Private key file",
+            "defaultValue": "",
+            "helpMarkDown": "The private key file is used for signing.",
+            "required": true,
+            "groupName": "keyFiles",
+            "visibleRule": "command = keypair || command = sign"
+        },
+        {
+            "name": "privateKeyPassword",
+            "type": "string",
+            "label": "Password",
+            "defaultValue": "",
+            "helpMarkDown": "The password of the private key.",
+            "required": false,
+            "groupName": "keyFiles",
+            "visibleRule": "command = keypair || command = sign"
+        },
+        {
+            "name": "templateFile",
+            "type": "filePath",
+            "label": "Template file",
+            "defaultValue": "",
+            "helpMarkDown": "Path of the template file.",
+            "required": true,
+            "groupName": "license",
+            "visibleRule": "command = template || command = sign"
+        },
+        {
+            "name": "licenseFile",
+            "type": "filePath",
+            "label": "License file",
+            "defaultValue": "",
+            "helpMarkDown": "Path of the license file.",
+            "required": true,
+            "groupName": "license",
+            "visibleRule": "command = sign || command = validate"
+        },
+        {
+            "name": "format",
+            "type": "pickList",
+            "label": "Format",
+            "defaultValue": "XML",
+            "helpMarkDown": "Format of the template/license file.",
+            "required": true,
+            "groupName": "license",
+            "options": {
+                "XML": "XML",
+                "JSON": "JSON"
+            },
+            "properties": {
+                "EditableOptions": "False"
+            },
+            "visibleRule": "command = template || command = sign || command = validate"
+        },
+        {
+            "name": "installCliTool",
+            "type": "boolean",
+            "label": "Install tool",
+            "defaultValue": true,
+            "helpMarkDown": "Check to install the CLI tool; otherwise to expect that the CLI tool is already installed.",
+            "required": false,
+            "groupName": "cli"
+        },
+        {
+            "name": "installCliPrerelease",
+            "type": "boolean",
+            "label": "Include pre-release versions",
+            "defaultValue": false,
+            "helpMarkDown": "Check to include pre-release version of the CLI tool; otherwise use release versions only.",
+            "required": false,
+            "groupName": "cli"
+        }
+    ],
+    "execution": {
+        "PowerShell3": {
+            "target": "task.ps1"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "manifestVersion": 1,
+    "id": "licensing",
+    "name": "Licensing",
+    "version": "0.1.0",
+    "publisher": "equadrat",
+    "public": true,
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Tool for signing and validating licenses.",
+    "categories": ["Azure Pipelines"],
+    "icons": {
+        "default": "images/equadrat.Licensing.Icon.png"
+    },
+    "files": [
+        {
+            "path": "task"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "contributions": [
+        {
+            "id": "cli",
+            "type": "ms.vss-distributed-task.task",
+            "targets": ["ms.vss-distributed-task.tasks"],
+            "properties": {
+                "name": "task"
+            }
+        }
+    ]
+}
